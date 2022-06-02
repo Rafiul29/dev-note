@@ -311,8 +311,17 @@ kubectl create -f https://raw.githubusercontent.com/minhaz1217/devops-notes/mast
 
 ### Go to firefox browser not chrome
 ## Now generate and save the token for further uses
-`kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"`
+## Getting a Bearer Token
+Now we need to find the token we can use to log in. Execute the following command:
+like ubuntu 20.04
+```
+kubectl -n kubernetes-dashboard create token admin-user
+```
+It should print something like:
+```
+eyJhbGciOiJSUzI1NiIsImtpZCI6IjBXaEM1cUNhWUhVaXdEaTlNQWNEbzd2dUI4dWs3azlKX0JBMVZpZkJHNlUifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjU0MTQwNjMxLCJpYXQiOjE2NTQxMzcwMzEsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJhZG1pbi11c2VyIiwidWlkIjoiYTI3ZGY0OWQtMTk2Ni00NmM3LWIwMzAtMDgxNzc3ODg2MTUyIn19LCJuYmYiOjE2NTQxMzcwMzEsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDphZG1pbi11c2VyIn0.jGge3cxZCXjPe8vGMbko0Fb69vCtnilQCEtVOgXZZVAfUG8xvdO_HsSOowJD1U6D2B7MB7mYbNGcug4M1SPPFav7TNWADwMCGa0szXQ79ZOqQPkmCesPQPxWyh2b8wiTSegqV6u99o8UH-Jnu2qnn8MXPTfOWM818bi19TEZabvfAh3v2nVsA-KX-87hjBUCkCo0ZJJSSVUk_UDnWC4aNG49VJ_mC8NH0XDBGj5M7gguhU6WJR8p02ssxXt_D3wwtDTIZsUrAZxFinZVKTeKqchhtGYJITnGDMfGKljoVbSfm87DRu4L2vONAJHJYSrq8iu8kPQeAcy50dCPS368rw
 
+```
 ### Now create a nodeport service to expose our pods using
 `nano nodeport.yaml`
 ```
